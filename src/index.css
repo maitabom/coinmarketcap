@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #18171C;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}

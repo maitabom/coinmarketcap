@@ -5,21 +5,23 @@ import { BsSearch } from "react-icons/bs";
 import Coin from "../../entities/coin";
 
 import styles from "./home.module.css";
+import CoinSource from "../../entities/sources/coin";
 
 function Home() {
   const [input, setInput] = useState("");
   const [coins, setCoins] = useState<Coin[]>([]);
   const [offset, setOffset] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function getData() {
+    if (loading) {
       fetch(`https://api.coincap.io/v2/assets?limit=10&offset=${offset}`)
         .then((response) => response.json())
         .then((data) => {
           const coinsData = data.data;
-          const result = coinsData.map((item) => {
+          const result = coinsData.map((item: CoinSource) => {
             const formatado: Coin = {
               ...item,
               rank: parseInt(item.rank),
@@ -37,11 +39,10 @@ function Home() {
 
           const pivot = [...coins, ...result];
           setCoins(pivot);
+          setLoading(false);
         });
     }
-
-    getData();
-  }, [offset]);
+  });
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -57,6 +58,8 @@ function Home() {
     } else {
       setOffset(offset + 10);
     }
+
+    setLoading(true);
   }
 
   return (

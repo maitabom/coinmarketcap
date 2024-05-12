@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 
 import Coin from "../../entities/coin";
+import CoinSource from "../../entities/sources/coin";
 
 import styles from "./home.module.css";
-import CoinSource from "../../entities/sources/coin";
+
 
 function Home() {
   const [input, setInput] = useState("");
